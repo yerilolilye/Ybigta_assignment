@@ -1,0 +1,23 @@
+# 과제 1번 Code
+
+#1
+
+SELECT C.CustomerID, C.CustomerName, SUM(P.Price * OD.Quantity) as '구매금액'
+FROM Customers C 
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN OrderDetails OD ON O.OrderID = OD.OrderID
+JOIN Products P ON OD.ProductID = P.ProductID
+GROUP BY C.CustomerID, C.CustomerName
+ORDER BY C.CustomerID;
+
+
+
+#2
+
+SELECT C.CategoryName, SUM(Quantity) as '판매량', SUM(Quantity*Price) as '판매금액'
+FROM Categories as C
+JOIN Products as P on P.CategoryID = C.CategoryID
+JOIN OrderDetails as OD on OD.ProductID = P.ProductID
+JOIN Orders as O on OD.OrderID = O.OrderID
+GROUP BY C.CategoryName
+ORDER BY '판매량' DESC, '판매금액' DESC;
